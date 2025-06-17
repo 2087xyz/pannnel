@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Lizenz-Verwaltung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    .container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 32px 24px 24px 24px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: #2d5be3;
+      letter-spacing: 1px;
+    }
+    form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus {
+      border-color: #2d5be3;
+      outline: none;
+    }
+    button {
+      background: #2d5be3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    button:hover {
+      background: #1746a2;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      background: #f0f4fa;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    li form {
+      margin: 0;
+      display: inline;
+    }
+    @media (max-width: 500px) {
+      .container {
+        padding: 16px 6px;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔑 Lizenzverwaltung</h1>
+    <form action="/add" method="POST">
+      <input type="text" name="key" placeholder="Neue Lizenz eingeben" required />
+      <button type="submit">➕ Hinzufügen</button>
+    </form>
+    <ul>
+      <% licenses.forEach(function(key) { %>
+      <li>
+        <span><%= key %></span>
+        <form action="/remove" method="POST">
+          <input type="hidden" name="key" value="<%= key %>" />
+          <button type="submit">❌ Löschen</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
